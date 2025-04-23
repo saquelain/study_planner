@@ -47,9 +47,9 @@ document.getElementById('days-left').textContent = calculateDaysLeft();
 
 // Generate topic distribution for each day
 const generateDailyTopics = (date) => {
-    // Check if it's a CodeForces contest day (Tuesday or Friday)
+    // Check if it's a CodeForces contest day (Sunday or Friday)
     const day = date.getDay();
-    if (day === 2 || day === 5) { // Tuesday or Friday
+    if (day === 0 || day === 5) { // Sunday or Friday
         return {
             isContestDay: true,
             tasks: [
