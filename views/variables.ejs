@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables Panel</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Study Planner Variables</h1>
+        </header>
+
+        <table class="variable-table">
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% variables.forEach(variable => { %>
+                    <tr>
+                        <td><%= variable.key %></td>
+                        <td><%= variable.value %></td>
+                        <td>
+                            <form action="/variables/delete" method="POST" style="display:inline;">
+                                <input type="hidden" name="key" value="<%= variable.key %>">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <div class="add-variable-form">
+            <h3>Add/Edit Variable</h3>
+            <form action="/variables" method="POST">
+                <label for="variable-key">Key:</label>
+                <input type="text" id="variable-key" name="key" required>
+
+                <label for="variable-value">Value:</label>
+                <input type="text" id="variable-value" name="value" required>
+
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

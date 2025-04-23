@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 
 // Import routes
 import progressRoutes from './routes/Progress.js';
+import variableRoutes from './routes/Variables.js';
 
 // Import Progress model
 import Progress from './models/Progress.js';
@@ -23,6 +24,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json()); // For parsing application/json
+app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
 app.use(express.static(path.join(__dirname, 'public'))); // For serving static files
 
 // Set EJS as the view engine
@@ -41,6 +43,9 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // API Routes
 app.use('/api/progress', progressRoutes);
+
+// Mount Variables routes
+app.use('/variables', variableRoutes);
 
 // Main route - render the calendar
 app.get('/', async (req, res) => {
