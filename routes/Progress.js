@@ -1,6 +1,6 @@
 // routes/progress.js
 import express from 'express';
-import Progress from '../models/Progress.js';
+import Progress, { Variable } from '../models/Progress.js';
 
 const router = express.Router();
 
@@ -65,6 +65,39 @@ router.post('/', async (req, res) => {
             success: false,
             error: 'Server Error'
         });
+    }
+});
+
+// Route to get all variables
+router.get('/study-planner-variables', async (req, res) => {
+    try {
+        const variables = await Variable.find();
+        res.json({ success: true, variables });
+    } catch (err) {
+        console.error('Error fetching variables:', err);
+        res.status(500).json({ success: false, error: 'Server Error' });
+    }
+});
+
+// Route to create or update a variable
+router.post('/study-planner-variables', async (req, res) => {
+    try {
+        const { key, value } = req.body;
+
+        if (!key) {
+            return res.status(400).json({ success: false, error: 'Key is required' });
+        }
+
+        const variable = await Variable.findOneAndUpdate(
+            { key },
+            { value },
+            { new: true, upsert: true }
+        );
+
+        res.json({ success: true, variable });
+    } catch (err) {
+        console.error('Error saving variable:', err);
+        res.status(500).json({ success: false, error: 'Server Error' });
     }
 });
 

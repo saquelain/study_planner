@@ -20,3 +20,19 @@ const ProgressSchema = new mongoose.Schema({
 const Progress = mongoose.model('Progress', ProgressSchema);
 
 export default Progress;
+
+const VariableSchema = new mongoose.Schema({
+    key: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    value: {
+        type: mongoose.Schema.Types.Mixed, // Allows any data type
+        required: true
+    }
+});
+
+const Variable = mongoose.model('Variable', VariableSchema);
+
+export { Variable };
