@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>MongoDB Connection Test</h1>
+    
+    <div class="container">
+        <h2>Get Completed Days</h2>
+        <button id="getProgress">Get Progress</button>
+        <div id="getResult"></div>
+    </div>
+    
+    <div class="container">
+        <h2>Update Completed Days</h2>
+        <p>This will add today's date to the completed days list.</p>
+        <button id="addToday">Add Today</button>
+        <div id="updateResult"></div>
+    </div>
+
+    <script>
+        // Get progress
+        document.getElementById('getProgress').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/progress');
+                const data = await response.json();
+                
+                document.getElementById('getResult').innerHTML = `
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('getResult').innerHTML = `
+                    <p style="color: red;">Error: ${error.message}</p>
+                `;
+            }
+        });
+
+        // Add today to completed days
+        document.getElementById('addToday').addEventListener('click', async () => {
+            try {
+                // First get current progress
+                const getResponse = await fetch('/api/progress');
+                const getData = await getResponse.json();
+                
+                const completedDays = getData.completedDays || [];
+                
+                // Format today's date as YYYY-M-D
+                const today = new Date();
+                const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+                
+                // Add today if not already in the list
+                if (!completedDays.includes(dateString)) {
+                    completedDays.push(dateString);
+                }
+                
+                // Update the progress
+                const updateResponse = await fetch('/api/progress', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ completedDays })
+                });
+                
+                const updateData = await updateResponse.json();
+                
+                document.getElementById('updateResult').innerHTML = `
+                    <pre>${JSON.stringify(updateData, null, 2)}</pre>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('updateResult').innerHTML = `
+                    <p style="color: red;">Error: ${error.message}</p>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Month Coding Study Plan</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>3-Month Coding Study Plan</h1>
+            <p>April 24 - July 24, 2025</p>
+        </header>
+
+        <div class="dashboard">
+            <div class="dashboard-card">
+                <h3>Total Problems</h3>
+                <div class="count">1000</div>
+                <div class="description">Problems to solve</div>
+            </div>
+            <div class="dashboard-card">
+                <h3>Daily Goal</h3>
+                <div class="count">10-12</div>
+                <div class="description">Problems per day</div>
+            </div>
+            <div class="dashboard-card">
+                <h3>Days Left</h3>
+                <div class="count" id="days-left">92</div>
+                <div class="description">Until completion</div>
+            </div>
+            <div class="dashboard-card">
+                <h3>Progress</h3>
+                <div class="count" id="progress-percentage">0%</div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress" id="main-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color algorithms"></div>
+                <span>Algorithms</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color spring-boot"></div>
+                <span>Spring Boot</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color codeforces"></div>
+                <span>CodeForces Contest</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color web-app"></div>
+                <span>Web App Dev</span>
+            </div>
+        </div>
+
+        <div class="calendar-container">
+            <div class="calendar-nav">
+                <button id="prev-month">&lt; Previous</button>
+                <span id="current-month" class="calendar-title">April 2025</span>
+                <button id="next-month">Next &gt;</button>
+            </div>
+            <table class="calendar" id="calendar-table">
+                <thead>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody id="calendar-body">
+                    <!-- Calendar will be generated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="topic-details">
+            <div class="topic-card">
+                <h3>Algorithm Topics Distribution</h3>
+                <ul class="topic-list">
+                    <li>
+                        <span class="topic-name">Hashing/Prefix-Sum/Suffix-Sum</span>
+                        <span class="topic-count">107</span>
+                    </li>
+                    <li>
+                        <span class="topic-name">Dynamic Programming</span>
+                        <span class="topic-count">104</span>
+                    </li>
+                    <li>
+                        <span class="topic-name">Greedy</span>
+                        <span class="topic-count">70</span>
+                    </li>
+                    <li>
+                        <span class="topic-name">Binary Search</span>
+                        <span class="topic-count">42</span>
+                    </li>
+                    <li>
+                        <span class="topic-name">Bit Manipulation</span>
+                        <span class="topic-count">40</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="topic-card">
+                <h3>Weekly Distribution</h3>
+                <ul class="topic-list">
+                    <li>
+                        <span class="topic-name">Algorithm Problems</span>
+                        <span class="topic-count">~80</span>
+                    </li>
+                    <li>
+                        <span class="topic-name">Spring Boot (hours)</span>
+                        <span class="topic-count">~10</span>
+                    </li>
+                    <li>
+                        <span class="topic-name">CodeForces Contests</span>
+                        <span class="topic-count">2</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Details Modal -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="task-details">
+                <h3 id="modal-date">April 24, 2025</h3>
+                <div id="modal-content">
+                    <!-- Will be populated dynamically -->
+                </div>
+                <div id="save-status" class="save-status"></div>
+                <div style="margin-top: 20px; display: flex; align-items: center;">
+                    <label class="switch">
+                      <input type="checkbox" id="task-completed">
+                      <span class="slider"></span>
+                    </label>
+                    <span class="completed-label">Mark day as completed</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Passing server data to client -->
+    <script>
+        // This will be populated from the server with EJS
+        const initialCompletedDays = <%- completedDays %>;
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
