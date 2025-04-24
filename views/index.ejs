@@ -15,8 +15,8 @@
 
         <div class="dashboard">
             <div class="dashboard-card">
-                <h3>Total Problems</h3>
-                <div class="count">1000</div>
+                <h3>Problems Solved</h3>
+                <div class="count" id="problems-solved">0 out of 1000</div>
                 <div class="description">Problems to solve</div>
             </div>
             <div class="dashboard-card">
@@ -154,6 +154,12 @@
     <script>
         // This will be populated from the server with EJS
         const initialCompletedDays = <%- completedDays %>;
+        // Calculate total problems based on completed days
+        const totalDays = initialCompletedDays.length;
+        const totalProblems = totalDays * 12;
+
+        // Update the dashboard dynamically
+        document.getElementById('problems-solved').textContent = `${totalProblems} out of 1000`;
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

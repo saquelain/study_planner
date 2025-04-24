@@ -15,7 +15,8 @@
     "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "mongoose": "^8.13.2"
+    "mongoose": "^8.13.2",
+    "study_planner": "file:"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
